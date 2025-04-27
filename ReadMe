@@ -1,0 +1,57 @@
+<p><b>Технічна документація: Робота з API погоди</b></p>
+
+<p><b>Встановлення залежностей:</b></p>
+<pre><code>
+pip install requests
+</code></pre>
+
+<p><b>Імпорт бібліотек</b></p>
+<pre><code>
+import requests
+</code></pre>
+<p><i>Імпортуємо бібліотеку requests, яка дозволяє здійснювати HTTP-запити.</i></p>
+
+<p><b>Конфігурація API</b></p>
+<pre><code>
+API_KEY = 'your_api_key_here'
+BASE_URL = 'http://api.openweathermap.org/data/2.5/weather'
+</code></pre>
+<p><i>Налаштовуємо ключ API та базову URL-адресу для запитів.</i></p>
+
+<p><b>Функція для отримання погоди</b></p>
+<pre><code>
+def get_weather(city_name):
+    params = {
+        'q': city_name,
+        'appid': API_KEY,
+        'units': 'metric'
+    }
+    response = requests.get(BASE_URL, params=params)
+    
+    if response.status_code == 200:
+        data = response.json()
+        temperature = data['main']['temp']
+        print(f"Поточна температура у місті {city_name}: {temperature}°C")
+    else:
+        print("Не вдалося отримати дані про погоду.")
+</code></pre>
+<p><i>Функція get_weather приймає назву міста, відправляє запит і виводить температуру.</i></p>
+<p><i>Якщо запит успішний (200 OK), витягуємо дані з JSON-відповіді.</i></p>
+
+<p><b>Виклик функції</b></p>
+<pre><code>
+if __name__ == "__main__":
+    city = input("Введіть назву міста: ")
+    get_weather(city)
+</code></pre>
+<p><i>Перевіряємо, чи скрипт виконується напряму, запитуємо назву міста та викликаємо функцію.</i></p>
+
+<p><b>Приклад роботи</b></p>
+<pre><code>
+$ python weather.py
+Введіть назву міста: Київ
+Поточна температура у місті Київ: 18°C
+</code></pre>
+<figure><img src="Images/61M_Image_1.png" alt="Enter image alt description"></figure>
+<figure><img src="Images/Wgf_Image_2.png" alt="Enter image alt description"></figure>
+<figure><img src="Images/DX0_Image_3.png" alt="Enter image alt description"></figure>
